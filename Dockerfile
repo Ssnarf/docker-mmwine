@@ -31,8 +31,8 @@ RUN \
      && rm -rf /var/lib/apt/lists/*
  
 # Install IE8 to resolve OLE errors
-RUN \
- winetricks -q ie8
+# RUN \
+#  winetricks -q ie8
  
 # Download latest mmw installer (beware 302 redirect)
 RUN \
