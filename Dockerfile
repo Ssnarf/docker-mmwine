@@ -9,9 +9,9 @@ LABEL maintainer="ssnarf"
 
 ENV APPNAME="MediaMonkey" UMASK_SET="022"
 
+# Base package install 
 RUN \
- echo "**** install runtime packages ****" \
- && apt-get update \
+ apt-get update \
  && apt-get install -y --no-install-recommends \
         apt-transport-https \
         ca-certificates \
@@ -26,10 +26,11 @@ RUN \
         wget \
         winbind \
         xvfb \
-        zenity \
- && echo "**** Add 32bit arch ****" \
- && dpkg --add-architecture i386 \
- && echo "**** Add wine and faudio (needed in 18.04) repos ****" \
+        zenity
+
+# Wine install
+RUN \
+ dpkg --add-architecture i386 \
  && wget -O - https://dl.winehq.org/wine-builds/winehq.key | apt-key add - \
  && add-apt-repository -y 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main' \
  && add-apt-repository -y ppa:cybermax-dexter/sdl2-backport \
@@ -37,9 +38,13 @@ RUN \
  && apt-get install -y --no-install-recommends \
         winehq-stable \
         winetricks \
-     && rm -rf /var/lib/apt/lists/* \
- && echo "**** get ie8 to resolve OLE errors ****" \
- && winetricks -q ie8 \
- && echo "**** download latest mmw installer (beware 302 redirect) ****" \
- && mkdir -p /opt/mmw \
+     && rm -rf /var/lib/apt/lists/*
+ 
+# Install IE8 to resolve OLE errors
+RUN \
+ winetricks -q ie8
+ 
+# Download latest mmw installer (beware 302 redirect)
+RUN \
+ mkdir -p /opt/mmw \
  && wget -O /opt/mmw/mmwsetup.exe https://www.mediamonkey.com/MediaMonkey_Setup.exe
