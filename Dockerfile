@@ -13,6 +13,7 @@ ENV APPNAME="MediaMonkey" UMASK_SET="022"
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
 		gnupg2 \
+		software-properties-common \
 		unzip \
 		wget \
 		ca-certificates
