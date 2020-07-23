@@ -10,23 +10,11 @@ LABEL maintainer="ssnarf"
 ENV APPNAME="MediaMonkey" UMASK_SET="022"
 
 # Base package install 
-RUN \
- apt-get update \
- && apt-get install -y --no-install-recommends \
-        apt-transport-https \
-        ca-certificates \
-        cabextract \
-        git \
-        gosu \
-        gpg-agent \
-        p7zip \
-        software-properties-common \
-        tzdata \
-        unzip \
-        wget \
-        winbind \
-        xvfb \
-        zenity
+RUN apt-get update \
+	&& apt-get install -y --no-install-recommends \
+		wget \
+		unzip \
+		ca-certificates
 
 # Wine install
 RUN \
