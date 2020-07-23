@@ -12,8 +12,9 @@ ENV APPNAME="MediaMonkey" UMASK_SET="022"
 # Base package install 
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
-		wget \
+		gnupg2 \
 		unzip \
+		wget \
 		ca-certificates
 
 # Wine install
