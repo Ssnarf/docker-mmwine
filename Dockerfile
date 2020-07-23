@@ -10,7 +10,15 @@ LABEL maintainer="ssnarf"
 ENV APPNAME="MediaMonkey" UMASK_SET="022"
 
 RUN \
- echo "**** install runtime packages ****" \
+ echo "**** Add 32bit arch ****" \
+ && dpkg --add-architecture i386 \
+ 
+ && echo "**** Add wine and faudio (needed in 18.04) repos ****" \
+ && wget -O - https://dl.winehq.org/wine-builds/winehq.key | apt-key add - \
+ && add-apt-repository -y 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main' \
+ && add-apt-repository -y ppa:cybermax-dexter/sdl2-backport # requires input \
+ 
+ && echo "**** install runtime packages ****" \
  && apt-get update \
  && apt-get install -y --no-install-recommends \
         apt-transport-https \
@@ -25,6 +33,15 @@ RUN \
         unzip \
         wget \
         winbind \
+        winehq-stable \
+        winetricks \
         xvfb \
         zenity \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    
+  && echo "**** get ie8 to resolve OLE errors ****" \
+  && winetricks -q ie8 \
+  
+  && echo "**** download latest mmw installer (beware 302 redirect) ****" \
+  && mkdir /opt/mmw \
+  && wget -O /opt/mmw/mmwsetup.exe https://www.mediamonkey.com/MediaMonkey_Setup.exe
