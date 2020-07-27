@@ -9,6 +9,16 @@ LABEL maintainer="ssnarf"
 
 ENV APPNAME="MediaMonkey" UMASK_SET="022"
 
+RUN addgroup --system xusers \
+  && adduser \
+			--home /home/xclient \
+			--disabled-password \
+			--shell /bin/bash \
+			--gecos "user for running an xclient application" \
+			--ingroup xusers \
+			--quiet \
+			xclient
+
 # Base package install 
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
