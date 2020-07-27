@@ -38,14 +38,3 @@ RUN \
 RUN \
  mkdir -p /opt/mmw \
  && wget -O /opt/mmw/mmwsetup.exe https://www.mediamonkey.com/MediaMonkey_Setup.exe
-
-# Add a nonroot user
-RUN addgroup --system snarf \
-  && adduser \
-			--home /home/snarf \
-			--disabled-password \
-			--shell /bin/bash \
-			--gecos "user for running an xclient application" \
-			--ingroup snarf \
-			--quiet \
-			snarf
