@@ -42,7 +42,7 @@ RUN \
 
 # Clean up
 RUN \
-  && rm -rf /var/lib/apt/lists/*
+  rm -rf /var/lib/apt/lists/*
  
 # Install IE8 to resolve OLE errors
 # RUN \
