@@ -55,7 +55,7 @@ ENV WINEPREFIX /home/xclient/.wine
 ENV WINEARCH win32
 
 # Use xclient's home dir as working dir
-WORKDIR /home/xclient
+# WORKDIR /home/xclient
 
 # Download latest mmw installer (beware 302 redirect)
 RUN \
