@@ -16,7 +16,8 @@ RUN apt-get update \
 		software-properties-common \
 		unzip \
 		wget \
-		ca-certificates
+		ca-certificates \
+		nano
 
 # Wine install
 RUN \
@@ -27,8 +28,11 @@ RUN \
  && apt-get update \
  && apt-get install -y --no-install-recommends \
         winehq-stable \
-        winetricks \
-     && rm -rf /var/lib/apt/lists/*
+        winetricks
+
+# Clean up
+RUN \
+  && rm -rf /var/lib/apt/lists/*
  
 # Install IE8 to resolve OLE errors
 # RUN \
