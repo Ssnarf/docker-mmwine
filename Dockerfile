@@ -49,7 +49,7 @@ RUN \
 #  winetricks -q ie8
 
 # Wine really doesn't like to be run as root, so let's use a non-root user
-USER xclient
+# USER xclient
 #ENV HOME /home/xclient
 #ENV WINEPREFIX /home/xclient/.wine
 #ENV WINEARCH win32
@@ -63,4 +63,4 @@ RUN \
  && wget -O /home/xclient/mmw/mmwsetup.exe https://www.mediamonkey.com/MediaMonkey_Setup.exe
 
 # Switch back to root user
-USER root
+# USER root
