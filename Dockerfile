@@ -56,7 +56,11 @@ ENV WINEARCH win32
 
 # Use xclient's home dir as working dir
 WORKDIR /home/xclient
+
 # Download latest mmw installer (beware 302 redirect)
 RUN \
  mkdir -p /home/xclient/mmw \
  && wget -O /home/xclient/mmw/mmwsetup.exe https://www.mediamonkey.com/MediaMonkey_Setup.exe
+
+# Switch back to root user
+USER root
