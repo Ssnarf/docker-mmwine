@@ -47,8 +47,16 @@ RUN \
 # Install IE8 to resolve OLE errors
 # RUN \
 #  winetricks -q ie8
- 
+
+# Wine really doesn't like to be run as root, so let's use a non-root user
+USER xclient
+ENV HOME /home/xclient
+ENV WINEPREFIX /home/xclient/.wine
+ENV WINEARCH win32
+
+# Use xclient's home dir as working dir
+WORKDIR /home/xclient
 # Download latest mmw installer (beware 302 redirect)
 RUN \
- mkdir -p /opt/mmw \
- && wget -O /opt/mmw/mmwsetup.exe https://www.mediamonkey.com/MediaMonkey_Setup.exe
+ mkdir -p /home/xclient/mmw \
+ && wget -O /home/xclient/mmw/mmwsetup.exe https://www.mediamonkey.com/MediaMonkey_Setup.exe
